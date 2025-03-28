@@ -12,7 +12,7 @@ const Manager = () => {
             setpasswordArray(JSON.parse(passwords))
         }
     }, [])
-
+ 
 
     const showPassword = () => {
         if (ref.current.src.includes('eyecross.png')) {
