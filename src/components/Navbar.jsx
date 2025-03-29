@@ -5,22 +5,21 @@ const Navbar = () => {
     <nav className='bg-slate-800 text-white'>
       <div className='mycontainer flex justify-between items-center px-4 py-5 h-14 '>
         <div className='logo font-bold text-white text-2xl'>
-        <span className='text-green-500'>&lt;</span>
-        Password-
+          <span className='text-green-500'>&lt;</span>
+          Password-
           <span className='text-green-500'>MANAGER/&gt;</span>
-          </div>
-        <ul>
-          <li className='flex gap-4'>
-            <a className='hover:font-bold' href="/">Home</a>
-            <a className='hover:font-bold' href="#">About</a>
-            <a className='hover:font-bold' href="#">Contact</a>
-          </li>
-        </ul>
+        </div>
         <div>
-          <img src="public\github-icon.png" alt="github-logo" />
+          <button className='flex justify-center items-center bg-green-400 rounded-full w-fit px-2 py-1 cursor-pointer text-black hover:font-bold'><lord-icon
+            src="https://cdn.lordicon.com/jjxzcivr.json"
+            trigger="hover"
+            stroke="bold"
+            colors="primary:#121331,secondary:#000000"
+          >
+          </lord-icon><a href="https://github.com/mdalii69/password-manager" target='_blank'>GitHub</a></button>
         </div>
       </div>
-    </nav> 
+    </nav>
   )
 }
 
