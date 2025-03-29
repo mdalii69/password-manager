@@ -1,36 +1,35 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
 
 const Manager = () => {
-    const ref = useRef()
-    const [form, setForm] = useState({ site: "", username: "", password: "" })
-    const [passwordArray, setpasswordArray] = useState([])
+    const ref = useRef(null);
+    const [form, setForm] = useState({ site: "", username: "", password: "" });
+    const [passwordArray, setpasswordArray] = useState([]);
 
     useEffect(() => {
-        let passwords = localStorage.getItem("passwords");
-        let passwordsArray;
+        const passwords = localStorage.getItem("passwords");
         if (passwords) {
-            setpasswordArray(JSON.parse(passwords))
+            setpasswordArray(JSON.parse(passwords));
         }
-    }, [])
- 
-
-    const showPassword = () => {
-        if (ref.current.src.includes('eyecross.png')) {
-            ref.current.src = 'eye_icon.webp'
-        }
-        else {
-            ref.current.src = 'eyecross.png'
-        }
-    }
+    }, []);
 
     const savePassword = () => {
-        setpasswordArray([...passwordArray, form])
-        localStorage.setItem("password", JSON.stringify([...passwordArray, form]))
-        console.log(passwordArray)
+        // Check if any of the form fields are empty
+        if (!form.site || !form.username || !form.password) {
+            alert("Please fill in all fields."); // Or use a more sophisticated error message
+            return; // Stop the function from proceeding
+        }
+
+        const updatedPasswords = [...passwordArray, form];
+        setpasswordArray(updatedPasswords);
+        localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
+        console.log(passwordArray);
+
+        // Optionally, you can clear the form after saving
+        setForm({ site: "", username: "", password: "" });
     }
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setForm({ ...form, [e.target.name]: e.target.value });
     }
 
     return (
@@ -45,12 +44,9 @@ const Manager = () => {
                 <div className=' flex flex-col p-4 gap-8 items-center'>
                     <input value={form.site} onChange={handleChange} className='rounded-full border border-green-500 px-4 py-1 w-full bg-white' type="text" name='site' id='' placeholder='Enter website URL' />
                     <div className='flex justify-between gap-8 w-full'>
-                        <input value={form.username} onChange={handleChange} name='username' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white required' type="text" placeholder='Enter Username' />
+                        <input value={form.username} onChange={handleChange} name='username' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white' type="text" placeholder='Enter Username' />
                         <div className="relative">
-                            <input value={form.password} onChange={handleChange} name='password' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white' type="text" placeholder='Enter Password' />
-                            <span className="absolute right-0 top-0 cursor-pointer" onClick={showPassword}>
-                                <img ref={ref} className='p-1' width={40} src="eyecross.png" alt="eye" />
-                            </span>
+                            <input value={form.password} onChange={handleChange} name='password' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white' type="password" placeholder='Enter Password' />
                         </div>
 
                     </div>
@@ -65,8 +61,8 @@ const Manager = () => {
                 <div className="passwords">
                     <h2 className='font-bold text-2xl py-4'>Your Passwords</h2>
                     {passwordArray.length === 0 && <div>No passwords to show</div>}
-                    {passwordArray.length != 0 &&
-                        <table class="table-auto w-full rounded-md overflow-hidden">
+                    {passwordArray.length !== 0 &&
+                        <table className="table-auto w-full rounded-md overflow-hidden">
                             <thead className='bg-green-800 text-white'>
                                 <tr>
                                     <th className='py-2'>Site</th>
@@ -77,7 +73,7 @@ const Manager = () => {
                             <tbody className='bg-green-100'>
                                 {passwordArray.map((item, index) => {
                                     return <tr key={index}>
-                                        <td className='text-center w-32 py-2'><a href={item.site} target='_blank'>{item.site}</a></td>
+                                        <td className='text-center w-32 py-2'><a href={item.site} target='_blank' rel="noopener noreferrer">{item.site}</a></td>
                                         <td className='text-center w-32 py-2'>{item.username}</td>
                                         <td className='text-center w-32 py-2'>{item.password}</td>
                                     </tr>
@@ -90,5 +86,4 @@ const Manager = () => {
     )
 }
 
-export default Manager
-
+export default Manager;
