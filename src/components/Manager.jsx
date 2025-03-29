@@ -45,7 +45,7 @@ const Manager = () => {
                 <div className=' flex flex-col p-4 gap-8 items-center'>
                     <input value={form.site} onChange={handleChange} className='rounded-full border border-green-500 px-4 py-1 w-full bg-white' type="text" name='site' id='' placeholder='Enter website URL' />
                     <div className='flex justify-between gap-8 w-full'>
-                        <input value={form.username} onChange={handleChange} name='username' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white' type="text" placeholder='Enter Username' />
+                        <input value={form.username} onChange={handleChange} name='username' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white required' type="text" placeholder='Enter Username' />
                         <div className="relative">
                             <input value={form.password} onChange={handleChange} name='password' className='rounded-full border border-green-500 w-full px-4 py-1 bg-white' type="text" placeholder='Enter Password' />
                             <span className="absolute right-0 top-0 cursor-pointer" onClick={showPassword}>
