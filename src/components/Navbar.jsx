@@ -16,6 +16,9 @@ const Navbar = () => {
             <a className='hover:font-bold' href="#">Contact</a>
           </li>
         </ul>
+        <div>
+          <img src="public\github-icon.png" alt="github-logo" />
+        </div>
       </div>
     </nav> 
   )
